@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const connect = require("connect");
 const { User, Post, Comment, } = require('../../models');
 
 // get all users
@@ -59,6 +60,16 @@ router.post('/', (req, res) => {
         password: req.body.password
     })
         .then(dbUserData => {
+            const SequelizeStore = require("connect-session-sequelize")(
+                connect.session.Store
+            );
+
+            connect().use(
+                connect.session({
+                    store: new SequelizeStore(options),
+                    secret: "CHANGEME",
+                })
+            );
             res.json(dbUserData);
         })
         .catch(err => {
@@ -86,11 +97,17 @@ router.post('/login', (req, res) => {
             return;
         }
 
+        req.session.save(() => {
+            req.session.user_id = dbUserData.id;
+            req.session.username = dbUserData.username;
+            req.session.loggedIn = true;
+
         res.json({ user: dbUserData, message: 'You are now logged in!' });
+        });
     });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', connect, (req, res) => {
     // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
 
     // pass in req.body instead to only update what's passed through
@@ -113,7 +130,7 @@ router.put('/:id', (req, res) => {
         });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', connect, (req, res) => {
     User.destroy({
         where: {
             id: req.params.id
@@ -130,6 +147,16 @@ router.delete('/:id', (req, res) => {
             console.log(err);
             res.status(500).json(err);
         });
+});
+
+router.post('/logout', (req, res) => {
+    if (req.session.loggedIn){
+        req.session.destroy(() => {
+            res.status(204).end();
+        })
+    } else {
+        res.status(404).end();
+    }
 });
 
 module.exports = router;

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const sequelize = require('../../config/connection');
+const connect = require("connect");
 const { Post, User, Comment, } = require('../../models');
 
 // get all users
@@ -75,7 +75,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
-router.post('/', (req, res) => {
+router.post('/', connect, (req, res) => {
     // expects {title: 'Taskmaster goes public!', post_url: 'https://taskmaster.com/press', user_id: 1}
     Post.create({
         title: req.body.title,
@@ -89,17 +89,7 @@ router.post('/', (req, res) => {
         });
 });
 
-// router.put('/upvote', (req, res) => {
-//     // custom static method created in models/Post.js
-//     Post.upvote({ ...req.body, user_id: req.session.user_id }, { Vote, Comment, User })
-//         .then(updatedVoteData => res.json(updatedVoteData))
-//         .catch(err => {
-//             console.log(err);
-//             res.status(500).json(err);
-//         });
-// });
-
-router.put('/:id', (req, res) => {
+router.put('/:id', connect, (req, res) => {
     Post.update(
         {
             title: req.body.title
@@ -123,7 +113,7 @@ router.put('/:id', (req, res) => {
         });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', connect, (req, res) => {
     console.log('id', req.params.id);
     Post.destroy({
         where: {
