@@ -10,8 +10,7 @@ router.get('/', (req, res) => {
             'id',
             'post_url',
             'title',
-            'created_at',
-            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
+            'created_at'
         ],
         include: [
             {
@@ -44,8 +43,7 @@ router.get('/:id', (req, res) => {
             'id',
             'post_url',
             'title',
-            'created_at',
-            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
+            'created_at'
         ],
         include: [
             {
@@ -75,8 +73,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
-router.post('/', connect, (req, res) => {
-    // expects {title: 'Taskmaster goes public!', post_url: 'https://taskmaster.com/press', user_id: 1}
+router.post('/', (req, res) => {
     Post.create({
         title: req.body.title,
         post_url: req.body.post_url,
@@ -89,7 +86,7 @@ router.post('/', connect, (req, res) => {
         });
 });
 
-router.put('/:id', connect, (req, res) => {
+router.put('/:id', (req, res) => {
     Post.update(
         {
             title: req.body.title
@@ -113,7 +110,7 @@ router.put('/:id', connect, (req, res) => {
         });
 });
 
-router.delete('/:id', connect, (req, res) => {
+router.delete('/:id', (req, res) => {
     console.log('id', req.params.id);
     Post.destroy({
         where: {

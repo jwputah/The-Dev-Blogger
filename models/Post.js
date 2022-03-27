@@ -7,17 +7,17 @@ Post.init(
     {
         id: {
             type: DataTypes.INTEGER,
-            notNull: true,
+            allowNull: false,
             primaryKey: true,
             autoIncrement: true
         },
         title: {
             type: DataTypes.STRING,
-            notNull: true
+            allowNull: false
         },
         post_url: {
             type: DataTypes.STRING,
-            notNull: true,
+            allowNull: false,
             validate: {
                 isURL: true
             }

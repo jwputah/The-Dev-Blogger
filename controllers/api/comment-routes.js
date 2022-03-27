@@ -11,8 +11,7 @@ router.get('/', (req, res) => {
         });
 });
 
-router.post('/', connect, (req, res) => {
-    // expects => {comment_text: "This is the comment", user_id: 1, post_id: 2}
+router.post('/', (req, res) => {
     Comment.create({
         comment_text: req.body.comment_text,
         user_id: req.session.user_id,
@@ -25,7 +24,7 @@ router.post('/', connect, (req, res) => {
         });
 });
 
-router.delete('/:id', connect, (req, res) => {
+router.delete('/:id', (req, res) => {
     Comment.destroy({
         where: {
             id: req.params.id
