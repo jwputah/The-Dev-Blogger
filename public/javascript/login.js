@@ -1,3 +1,4 @@
+//placeholder for the top of the page
 async function loginFormHandler(event) {
     event.preventDefault();
 
@@ -6,12 +7,12 @@ async function loginFormHandler(event) {
 
     if (email && password) {
         const response = await fetch('/api/users/login', {
-            method: 'post',
+            method: 'POST',
             body: JSON.stringify({
                 email,
-                password
+                password,
             }),
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json' },
         });
 
         if (response.ok) {
@@ -28,24 +29,31 @@ async function signupFormHandler(event) {
     const username = document.querySelector('#username-signup').value.trim();
     const email = document.querySelector('#email-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
+    console.log(username, email, password);
 
-    if (username && email && password) {
-        const response = await fetch('/api/users', {
-            method: 'post',
+    if (email && password) {
+        const response = await fetch('/api/users/signup', {
+            method: 'POST',
             body: JSON.stringify({
                 username,
                 email,
-                password
+                password,
             }),
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json' },
         });
+
         if (response.ok) {
-            console.log('success');
+            document.location.replace('/dashboard/');
         } else {
             alert(response.statusText);
         }
     }
 }
 
-document.querySelector('.login-form').addEventListener('submit', loginFormHandler);
-document.querySelector('.signup-form').addEventListener('submit', signupFormHandler);
+document
+    .querySelector('.login-form')
+    .addEventListener('submit', loginFormHandler);
+
+document
+    .querySelector('.signup-form')
+    .addEventListener('submit', signupFormHandler);

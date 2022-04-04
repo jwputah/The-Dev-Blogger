@@ -30,7 +30,8 @@ router.get('/', (req, res) => {
             const posts = dbPostData.map(post => post.get({ plain: true }));
 
             res.render('homepage', { posts });
-            loggedIn: req.session.loggedIn
+            // Check line 34
+            loggedIn = req.session.loggedIn
         })
         .catch(err => {
             console.log(err);
@@ -40,11 +41,12 @@ router.get('/', (req, res) => {
 
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
+        // Check redirect route???
         res.redirect('/');
         return;
     }
 
-    res.render('dashboard');
+    res.render('login');
 });
 
 router.get('/post/:id', (req, res) => {
