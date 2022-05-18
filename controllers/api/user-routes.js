@@ -54,15 +54,14 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     User.create({
         username: req.body.username,
-        password: req.body.password
+        password: req.body.password,
+        email: req.body.email,
     })
         .then(dbUserData => {
             req.session.save(() => {
-                req.session.user_id = dbUserData.id;
-                req.session.username = dbUserData.username;
                 req.session.loggedIn = true;
 
-                res.json(dbUserData);
+                res.status(204).json(dbUserData);
             });
         })
         .catch(err => {
@@ -88,12 +87,9 @@ router.post('/login', (req, res) => {
             return;
         }
         req.session.save(() => {
-
-            req.session.user_id = dbUserData.id;
-            req.session.username = dbUserData.username;
             req.session.loggedIn = true;
 
-            res.json({ user: dbUserData, message: 'You are now logged in.' });
+            res.status(204).json({ user: dbUserData, message: 'You are now logged in.' });
         });
     })
         .catch(err => {
@@ -133,7 +129,7 @@ router.delete('/:id', (req, res) => {
                 res.status(404).json({ message: 'No user found with this id' });
                 return;
             }
-            res.json(dbUserData);
+            res.status(204).json(dbUserData);
         })
         .catch(err => {
             console.log(err);
