@@ -4,9 +4,7 @@
 
 :root {
     --primary: #ccdad1;
-    --secondary: #dce9d5;
-    --tertiary: #788585;
-    --light-dark: #a1a0a1;
+    --shadow: #788585;
     --dark: #201110;
 }
 
@@ -35,7 +33,7 @@ body {
 }
 
 .nav {
-    padding: 30px;
+    padding: 10px;
     line-height: 1.25;
     float: top;
 }
@@ -49,49 +47,44 @@ body {
 }
 
 .app-title {
-    font-size: 3rem;
+    font-size: 50px;
     background-color: var(--primary);
     color: var(--dark);
     padding: 0 10px;
     display: inline-block;
     border-radius: 20px;
-    box-shadow: 10px 10px var(--light-dark);
+    box-shadow: 10px 10px var(--shadow);
 }
 
 .card {
     margin: 0 0 20px 0;
     border: 2px solid var(--dark);
-    border-radius: 20px;
 }
 
 .card-header {
     color: var(--primary);
     background-color: var(--dark);
-    padding: 1%;
-    border-radius: 10px;
+    padding: 5px;
 }
 
 .card-body {
     padding: 5px;
-    
 }
 
 .post {
     color: var(--dark);
     background-color: var(--primary);
-    padding: 1%;
-    border-radius: 10px;
+    padding: 5px;
 }
 
 .title {
     margin: 0 0 20px 0;
     border: 2px solid var(--dark);
-    border-radius: 20px;
+    border-radius: 5px;
 }
 
 .meta {
     color: var(--dark);
-    
 }
 
 .comment-link {
@@ -101,12 +94,13 @@ body {
 .title-link {
     color: var(--dark);
     display: block;
+    text-align: center;
 }
 
 .signup-form,
 .login-form {
     padding: 20px;
-    border: 3px solid var(--light-dark);
+    border: 3px solid var(--dark);
     border-radius: 20px;
     margin-top: 55px;
     background-color: var(--primary);
@@ -121,7 +115,7 @@ body {
 
 .new-post-form {
     padding: 20px;
-    border: 3px solid var(--light-dark);
+    border: 3px solid var(--dark);
     border-radius: 15px;
     margin-top: 55px;
     background-color: var(--primary);
