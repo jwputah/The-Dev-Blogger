@@ -1,11 +1,11 @@
 <section class="post">
     <div class="title">
-        <a href= "/post/{{id}}">{{title}}</a>
+        <a class="title-link" href= "/post/{{id}}">{{title}}</a>
         <span>({{text}})</span>
     </div>
     <div class="meta">
         by {{user.username}} on {{format_date created_at}}
-        <a href="/post/{{id}}">
+        <a class="comment-link" href="/post/{{id}}">
             {{comments.length}} {{ format_plural "comment" comments.length}}
         </a>
     </div>
