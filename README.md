@@ -22,9 +22,9 @@ Therefore this ia  a CMS-style blog site similar to a Wordpress site, where deve
 
 ###
 
-[Link to Deployed Application]()
+[Link to Deployed Application](https://afternoon-cove-66194.herokuapp.com/)
 
-![screenshot]()
+![screenshot](./utils/screenshot.png)
 
 ### Questions
 
