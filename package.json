@@ -17,6 +17,9 @@
   "bugs": {
     "url": "https://github.com/jwputah/The-Dev-Blogger/issues"
   },
+  "engines": {
+    "node": "v16.13.2"
+  },
   "homepage": "https://github.com/jwputah/The-Dev-Blogger#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
